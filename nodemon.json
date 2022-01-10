@@ -1,0 +1,7 @@
+{
+    "env":{
+        "DB_USER":"burhan",
+        "DB_PASSWORD":"8ghGhUsHSbJIFMBb",
+        "DB_NAME":"Quiz"
+    }
+}
