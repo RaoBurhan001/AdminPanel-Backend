@@ -11,7 +11,8 @@ app.use(express.json());
 app.use(routes);
 
 
-mongoose.connect("mongodb://localhost:27017/Quiz", { useNewUrlParser: true, useUnifiedTopology: true })
+
+mongoose.connect(`mongodb+srv://raoburhan:Benzene234@cluster0.frjap.mongodb.net/Project0?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('database connected'))
