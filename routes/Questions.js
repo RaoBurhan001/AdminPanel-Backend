@@ -4,6 +4,7 @@ const subjective = require("../models/Subjective")
 const objective = require("../models/Objective");
 const Subjective = require("../models/Subjective");
 const Objective = require("../models/Objective");
+const Result = require('../models/Result')
 
 
 
@@ -89,18 +90,41 @@ router.post("/questions/subjective" , async(req,res)=>{
 })
 
 
-router.post("/questions/objective" , async (req,res)=>{
+router.post("/questions/objective/create" , async (req,res)=>{
     console.log(req.body)
     try{
     const {description} = req.body
-    const { alternatives } = req.body
+    const { option1 , option2 , option3 , option4 } = req.body
 
     const objective= await Objective.create({
         description,
-        alternatives
+        option1 , 
+        option2 , 
+        option3 , 
+        option4
     })
-    console.log(description , alternatives)
+    console.log(description )
     return res.status(201).json(objective)
+
+    }catch(error){
+        console.log(error)
+        return res.status(500).json({"error":error})
+    }
+
+})
+
+
+router.post("/questions/result" , async (req,res)=>{
+    console.log(req.body)
+    try{
+    const { report } = req.body
+    //const { option1 , option2 , option3 , option4 } = req.body
+
+    const newReport= await Result.create({
+       report
+    })
+    console.log(report )
+    return res.status(201).json(newReport)
 
     }catch(error){
         console.log(error)
@@ -150,18 +174,24 @@ router.put('/questions/objective/:id' , async(req,res)=>{
     try{
         const _id = req.params.id;
         const { description }= req.body
-         const { alternatives } =req.body
+         const { option1 , option2 ,option3 ,option4 } =req.body
         let question = await Objective.findOne({_id})
         if(!question)
         {
             question = await Objective.create({
                 description,
-                alternatives
+                option1 ,
+                 option2 ,
+                 option3 ,
+                 option4
             })
             return res.status(201).json(question)
         }else{
             question.description = description
-            question.alternatives = alternatives
+            question.option1 = option1
+            question.option2 = option2
+            question.option3 = option3
+            question.option4 = option4
             await question.save()
             return res.status(200).json(question)
         }
