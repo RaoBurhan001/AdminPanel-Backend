@@ -37,7 +37,7 @@ const PORT = process.env.PORT
 
 
 
-app.listen(PORT || 5000 ,()=>{
+app.listen(process.env.PORT || 5000 ,()=>{
     console.log(`API is running 5000`);
     console.log(PORT)
 })
