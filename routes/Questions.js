@@ -67,7 +67,15 @@ router.get("/questions/objective/:id" , async(req,res)=>{
 })
 
 
-
+router.get('/questions/showResult',async(req,res)=>{
+    try{
+        const result= await Result.find()
+        return res.status(200).json(result)
+    }
+    catch(error){
+        return res.status(500).json({"error" : error.message})
+    }
+})
 
 
 router.post("/questions/subjective" , async(req,res)=>{
