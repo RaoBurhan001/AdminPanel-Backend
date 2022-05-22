@@ -125,13 +125,15 @@ router.post("/questions/objective/create" , async (req,res)=>{
 router.post("/questions/result" , async (req,res)=>{
     console.log(req.body)
     try{
-    const { report } = req.body
+    const { report , Name, Email } = req.body
     //const { option1 , option2 , option3 , option4 } = req.body
 
     const newReport= await Result.create({
-       report
+       report,
+       Name,
+       Email
     })
-    console.log(report )
+    console.log(report,Name,Email )
     return res.status(201).json(newReport)
 
     }catch(error){
